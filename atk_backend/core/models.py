@@ -24,7 +24,7 @@ class TraineeProfile(models.Model):
         YELLOW = "Yellow", "Yellow"
 
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
     age = models.IntegerField(blank=False)
     phone_number = models.CharField(max_length=20, blank=False)
     deparment = models.CharField(max_length=100, blank=False)
@@ -34,4 +34,4 @@ class TraineeProfile(models.Model):
 
     class Meta:
         def __str__(self):
-            return "Trainee Profile"
+            return  "Traniee Profile"
