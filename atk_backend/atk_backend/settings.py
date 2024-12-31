@@ -45,7 +45,9 @@ INSTALLED_APPS = [
 
     # Third Party App
     "rest_framework",
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    "corsheaders",
+    "drf_spectacular"
 ]
 
 # Rest Framework settings
@@ -55,18 +57,28 @@ REST_FRAMEWORK = {
     ], 
     'DEFUALT_AUTHENTICATION_CLASSES':[
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"
 }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:3000",
+    "http://localhost:8000",
+)
+
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 
 ROOT_URLCONF = 'atk_backend.urls'
 
@@ -145,4 +157,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
-  }
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Awovasity Taekwando API",
+    "DESCRIPTION": "A simple API that manages trainees and their taekwondo skills.",
+    "VERSION": "1.0.0",
+    # OTHER SETTINGS
+}

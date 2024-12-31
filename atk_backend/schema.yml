@@ -1,0 +1,496 @@
+openapi: 3.0.3
+info:
+  title: Awovasity Taekwando API
+  version: 1.0.0
+  description: A simple API that manages trainees and their taekwondo skills.
+paths:
+  /api/auth/v1/login/:
+    post:
+      operationId: api_auth_v1_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/auth/v1/login/refresh/:
+    post:
+      operationId: api_auth_v1_login_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/auth/v1/register/:
+    post:
+      operationId: api_auth_v1_register_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSerilaizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserSerilaizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserSerilaizer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerilaizer'
+          description: ''
+  /api/v1/trainee/{id}:
+    get:
+      operationId: api_v1_trainee_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerilaizer'
+          description: ''
+    put:
+      operationId: api_v1_trainee_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSerilaizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserSerilaizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserSerilaizer'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerilaizer'
+          description: ''
+    patch:
+      operationId: api_v1_trainee_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserSerilaizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserSerilaizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserSerilaizer'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerilaizer'
+          description: ''
+    delete:
+      operationId: api_v1_trainee_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/trainee/{id}/:
+    get:
+      operationId: api_v1_trainee_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSerilaizer'
+          description: ''
+  /api/v1/traineeprofile/{id}/:
+    get:
+      operationId: api_v1_traineeprofile_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranieeProfileSerilizer'
+          description: ''
+    put:
+      operationId: api_v1_traineeprofile_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranieeProfileSerilizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TranieeProfileSerilizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TranieeProfileSerilizer'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranieeProfileSerilizer'
+          description: ''
+    patch:
+      operationId: api_v1_traineeprofile_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTranieeProfileSerilizer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTranieeProfileSerilizer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTranieeProfileSerilizer'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranieeProfileSerilizer'
+          description: ''
+    delete:
+      operationId: api_v1_traineeprofile_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/trainees:
+    get:
+      operationId: api_v1_trainees_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserSerilaizer'
+          description: ''
+components:
+  schemas:
+    BeltRankEnum:
+      enum:
+      - White
+      - Blue
+      - Green
+      - Purple
+      - Black
+      - Brown
+      - Red
+      - Orange
+      - Yellow
+      type: string
+      description: |-
+        * `White` - White
+        * `Blue` - Blue
+        * `Green` - Green
+        * `Purple` - Purple
+        * `Black` - Black
+        * `Brown` - Brown
+        * `Red` - Red
+        * `Orange` - Orange
+        * `Yellow` - Yellow
+    LevelEnum:
+      enum:
+      - 100
+      - 200
+      - 300
+      - 400
+      - 500
+      type: integer
+      description: |-
+        * `100` - 100_level
+        * `200` - 200_level
+        * `300` - 300_level
+        * `400` - 400_level
+        * `500` - 500_lavel
+    PatchedTranieeProfileSerilizer:
+      type: object
+      properties:
+        age:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        phone_number:
+          type: string
+          maxLength: 20
+        department:
+          type: string
+          maxLength: 100
+        level:
+          allOf:
+          - $ref: '#/components/schemas/LevelEnum'
+          minimum: -9223372036854775808
+          maximum: 9223372036854775807
+        belt_rank:
+          $ref: '#/components/schemas/BeltRankEnum'
+    PatchedUserSerilaizer:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        date_joined:
+          type: string
+          format: date-time
+        trainee_profile:
+          $ref: '#/components/schemas/TranieeProfileSerilizer'
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    TranieeProfileSerilizer:
+      type: object
+      properties:
+        age:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        phone_number:
+          type: string
+          maxLength: 20
+        department:
+          type: string
+          maxLength: 100
+        level:
+          allOf:
+          - $ref: '#/components/schemas/LevelEnum'
+          minimum: -9223372036854775808
+          maximum: 9223372036854775807
+        belt_rank:
+          $ref: '#/components/schemas/BeltRankEnum'
+      required:
+      - age
+      - department
+      - phone_number
+    UserSerilaizer:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        date_joined:
+          type: string
+          format: date-time
+        trainee_profile:
+          $ref: '#/components/schemas/TranieeProfileSerilizer'
+      required:
+      - username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
