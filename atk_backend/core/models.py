@@ -24,10 +24,10 @@ class TraineeProfile(models.Model):
         YELLOW = "Yellow", "Yellow"
 
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="trainee_profile")
     age = models.IntegerField(blank=False)
     phone_number = models.CharField(max_length=20, blank=False)
-    deparment = models.CharField(max_length=100, blank=False)
+    department = models.CharField(max_length=100, blank=False)
     level = models.IntegerField(choices=Level, default=Level.PART_1)
     belt_rank = models.CharField(max_length=225, choices=BeltRank, default=BeltRank.WHITE)
 
