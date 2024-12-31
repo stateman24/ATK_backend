@@ -8,12 +8,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # NOTE : Admin password: atkadmin
 
-# create new traniee 
-class NewTrainee(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerilaizer
-    permission_classes = [AllowAny]
-
 # list all trainees 
 class ListTrainees(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
