@@ -9,17 +9,22 @@ class TranieeProfileSerilizer(serializers.ModelSerializer):
 
 
 class UserSerilaizer(serializers.ModelSerializer):
-    trainee_profile = TranieeProfileSerilizer()
+    trainee_profile = TranieeProfileSerilizer(required=False)
     class Meta:
         model = User
         fields = ['username', "first_name", "last_name", "email", "date_joined", "trainee_profile"]    
 
     def create(self, validated_data):
-        profile_data = validated_data.pop('trainee_profile')
-        user = User.objects.create(**validated_data)
-        TraineeProfile.objects.create(user=user, **profile_data)
-        return user
-    
+        try:
+            profile_data = validated_data.pop('trainee_profile')
+            user = User.objects.create(**validated_data)
+            TraineeProfile.objects.create(user=user, **profile_data)
+            return user
+        except KeyError:
+            return super().create(validated_data)
+        
+   
+
     def update(self, instance, validated_data):
         profile_data = validated_data.pop("trainee_profile")
         profile = instance.trainee_profile
