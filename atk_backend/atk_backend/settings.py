@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Local App
     "core",
+    "auth",
 
     # Third Party App
     "rest_framework"
