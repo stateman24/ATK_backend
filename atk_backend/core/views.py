@@ -19,6 +19,11 @@ class ListTrainees(generics.ListAPIView):
     serializer_class = UserSerilaizer
     permission_classes = [AllowAny]
 
+class UpdateDeleteTrainee(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.prefetch_related("trainee_profile")
+    serializer_class = UserSerilaizer
+    permission_classes = [AllowAny]
+
 # list a single trainee
 class ListTrainee(generics.RetrieveAPIView):
     serializer_class = UserSerilaizer
@@ -30,12 +35,7 @@ class ProfileTrainee(generics.RetrieveAPIView):
     permission_classes = [AllowAny]
     queryset = TraineeProfile.objects.all()
 
-class UpdateTranieeProfile(generics.RetrieveUpdateAPIView):
-    queryset = TraineeProfile.objects.all()
+class UpdateDeleteProfileTrainee(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TranieeProfileSerilizer
     permission_classes = [AllowAny]
-
-class DeleteTraineeProfile(generics.RetrieveDestroyAPIView):
-    serializer_class = TranieeProfileSerilizer
-    permission_classes = [AllowAny]
-    queryset = TraineeProfile.objects.all()
+    queryset = TraineeProfile
