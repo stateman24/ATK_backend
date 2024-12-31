@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awovasity Taekwando Club Trainee Report</title>
+    <style>
+        body {
+            font-family: Time New Roman, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 75%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Awovasity Taekwando Club Trainee Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Department</th>
+                <th>Level</th>
+                <th>Belt Rank</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for trainee in trainees %}
+                <tr>
+                    <td>{{trainee.id}}</td>
+                    <td>{{trainee.first_name}}</td>
+                    <td>{{trainee.last_name}}</td>
+                    <td>{{trainee.email}}</td>
+                    <td>{{trainee.trainee_profile.age}}</td>
+                    <td>{{trainee.trainee_profile.department}}</td>
+                    <td>{{trainee.trainee_profile.level}}</td>
+                    <td>{{trainee.trainee_profile.belt_rank}}</td>
+                    <td>{{trainee.trainee_profile.phone_number}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from rest_framework import generics
 from django.contrib.auth.models import User
 from .serializers import UserSerilaizer, TranieeProfileSerilizer
@@ -39,3 +40,9 @@ class UpdateDeleteProfileTrainee(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TranieeProfileSerilizer
     permission_classes = [IsAuthenticated]
     queryset = TraineeProfile
+
+
+def trainee_report(request):
+    trainees = User.objects.all()
+    context = {"trainees": trainees}
+    return render(request, 'core/trainee_report.html', context)
