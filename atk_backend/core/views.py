@@ -47,8 +47,6 @@ class UpdateDeleteProfileTrainee(generics.RetrieveUpdateDestroyAPIView):
     queryset = TraineeProfile
 
 
-
-
 class GenerateReport(APIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
     authentication_classes = [JWTAuthentication]
