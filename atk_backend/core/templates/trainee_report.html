@@ -16,7 +16,7 @@
             color: #333;
         }
         table {
-            width: 75%;
+            width: 100%;
             border-collapse: collapse;
             margin: 20px auto;
             background-color: #fff;
@@ -58,15 +58,15 @@
             
             {% for trainee in trainees %}
                 <tr>
-                    <td>{{trainee.id}}</td>
-                    <td>{{trainee.first_name}}</td>
-                    <td>{{trainee.last_name}}</td>
-                    <td>{{trainee.email}}</td>
-                    <td>{{trainee.trainee_profile.age}}</td>
-                    <td>{{trainee.trainee_profile.department}}</td>
-                    <td>{{trainee.trainee_profile.level}}</td>
-                    <td>{{trainee.trainee_profile.belt_rank}}</td>
-                    <td>{{trainee.trainee_profile.phone_number}}</td>
+                    <td>{{trainee.id|escape}}</td>
+                    <td>{{trainee.first_name|escape}}</td>
+                    <td>{{trainee.last_name|escape}}</td>
+                    <td>{{trainee.email|escape}}</td>
+                    <td>{{trainee.trainee_profile.age|escape}}</td>
+                    <td>{{trainee.trainee_profile.department|escape}}</td>
+                    <td>{{trainee.trainee_profile.level|escape}}</td>
+                    <td>{{trainee.trainee_profile.belt_rank|escape}}</td>
+                    <td>{{trainee.trainee_profile.phone_number|escape}}</td>
                 </tr>
             {% endfor %}
         </tbody>
