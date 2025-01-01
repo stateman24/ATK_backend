@@ -61,7 +61,7 @@ class GenerateReport(APIView):
         return data
 
     def get(self, request, format=None):
-        trainee_data = self.sanitize_data(User.objects.all())
+        trainee_data = self.sanitize_data(User.objects.exclude(email="atk_admin@gmail.com"))
         # render data to string 
         html_string = render_to_string("trainee_report.html", {"trainees": trainee_data})
         html_string = smart_str(html_string, encoding='utf-8')

@@ -58,7 +58,7 @@
             
             {% for trainee in trainees %}
                 <tr>
-                    <td>{{trainee.id|escape}}</td>
+                    <td>{{forloop.counter|escape}}</td>
                     <td>{{trainee.first_name|escape}}</td>
                     <td>{{trainee.last_name|escape}}</td>
                     <td>{{trainee.email|escape}}</td>
